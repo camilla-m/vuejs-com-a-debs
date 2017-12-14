@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+ <html lang="en">
+   <head>
+     <meta charset="utf-">
+     <title>Lista de livros</title>
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+     <link rel="stylesheet" href="css/index.css" />
+     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.1.8/vue.js"></script>
+     
+   </head>
+ 
+   <body>
+    <div id="app" class="container">
+        <h2>{{cabecalho}}</h2>
+        <input v-model="novoLivro" @keyup.enter="addLivro"
+        placeholder="Adicionar novo livro" type="text" 
+        class="form-control"> 
+     <input v-model="novoAutor" @keyup.enter="addLivro"
+        placeholder="Adicionar novo autor" type="text" 
+        class="form-control"> <br>
+      
+     <span class="input-group-btn"> 
+        <button @click="addLivro" class="js-add btn btn-primary btn-block" 
+           type="button">Adicionar!</button> 
+     </span>
+        <ul>
+        <li v-for="livro in livros" v-bind:class="{ 'removido': livro.checked }">
+        <div class="checkbox">
+        <label>
+        <input class="js-livro" name="list" type="checkbox" v-model="livro.checked">
+        <big>{{livro.titulo}}</big> - <small>{{livro.autor}}</small>
+        </label>
+        </div>
+        </li>
+        </ul>
+        <div class="footer">
+        <hr/>
+        <em>Modifique o título da lista:</em>
+        <input v-model="cabecalho"/>
+        </div>
+</div>
+ </body>
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script></html>
