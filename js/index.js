@@ -1,12 +1,12 @@
 function onAdd() {
 
     
-let $ul, li, $li, $label, $div, livro, autor;
- livro = $('.js-novo-livro').val();
+let $ul, li, $li, $label, $div, palestra, autor;
+ palestra = $('.js-nova-palestra').val();
  autor = $('.js-novo-autor').val();
    
-    // valida se “livro” está vazio
-    if (livro === '') {
+    // valida se “palestra” está vazio
+    if (palestra === '') {
           return;
     }
     $ul = $('ul');
@@ -18,14 +18,14 @@ let $ul, li, $li, $label, $div, livro, autor;
       $label = $('<label>').appendTo($div);
       $('<input>')
           .attr('type', 'checkbox')
-           .addClass('js-livro')
+           .addClass('js-palestra')
            .attr('name', 'list')
            .click(toggleRemovido)
            .appendTo($label);
   
      $('<big>')
             .appendTo($label)
-           .append(livro);
+           .append(palestra);
             
        $label.append(" - ");
             
@@ -33,15 +33,15 @@ let $ul, li, $li, $label, $div, livro, autor;
             .appendTo($label)
             .append(autor);
             
-     $('.js-novo-livro, .js-novo-autor').val('');
+     $('.js-nova-palestra, .js-novo-autor').val('');
  }
 
  // Data e Vue
     let data = {
-     livros: [{ titulo: 'Orange is The New Black', autor: 'Piper Kerman', checked: true },
-             { titulo: 'A Origem das Espécies', autor: 'Charles Darwin', checked: false }],
-     cabecalho: 'Livros Preferidos',
-     novoLivro: '',
+     palestras: [{ titulo: 'Construindo um site em 10min com vue.js', autor: 'Camilla Martins && Débora Duarte', checked: true },
+             { titulo: 'CSS no JavaScript. Usar ou não usar? Eis a questão!', autor: 'Aline Bastos', checked: false }],
+     cabecalho: 'FrontInPoa && BrazilJs',
+     novapalestra: '',
      novoAutor: '',
     currentRoute: '/',
     contador: 200,
@@ -51,18 +51,18 @@ let $ul, li, $li, $label, $div, livro, autor;
    
 //Methods
   let methods = {
-     addLivro: function () {
+     addpalestra: function () {
        console.log('ok');
          var titulo, autor;
-         titulo = this.novoLivro.trim();
+         titulo = this.novapalestra.trim();
          autor = this.novoAutor.trim();
          if (titulo) {
-           this.livros.push({
+           this.palestras.push({
              titulo: titulo,
              autor: autor,
              checked: false
            });
-           this.novoLivro = "";
+           this.novapalestra = "";
            this.novoAutor = "";
          }
        },
@@ -80,11 +80,11 @@ let $ul, li, $li, $label, $div, livro, autor;
        return data;
      },
      template: '<ul>' +
-     '           <li v-for="livro in livros" :class="{ \'removido\': livro.checked }">' +
+     '           <li v-for="palestra in palestras" :class="{ \'removido\': palestra.checked }">' +
      '             <div class="checkbox">' +
      '              <label>' +
-     '                     <input type="checkbox" v-model="livro.checked"> ' +
-     '                     <big>{{ livro.titulo }}</big> - <small>{{ livro.autor }}</small>' +
+     '                     <input type="checkbox" v-model="palestra.checked"> ' +
+     '                     <big>{{ palestra.titulo }}</big> - <small>{{ palestra.autor }}</small>' +
      '              </label>' +
      '             </div>' +
      '           </li>' +
@@ -95,7 +95,8 @@ let $ul, li, $li, $label, $div, livro, autor;
      data: function () {
        return data;
      },
-     template: '<input v-model="cabecalho"/>'
+     template: 
+     '<input v-model="cabecalho" class="form-control"/>'
    });
    
    var AddItemComp = Vue.extend({
@@ -105,14 +106,14 @@ let $ul, li, $li, $label, $div, livro, autor;
      methods: methods,
      template:
        '<div>' +
-             '<input v-model="novoLivro" @keyup.enter="addLivro"' +
-                    ' placeholder="Adicionar título do livro" type="text" class="form-control" />'  +
-             '<input v-model="novoAutor" @keyup.enter="addLivro"' +
-                    ' placeholder="Adicionar autor do livro" type="text" class="form-control" /> <br/>'  +
+             '<input v-model="novapalestra" @keyup.enter="addpalestra"' +
+                    ' placeholder="Adicionar título da palestra" type="text" class="form-control" />'  +
+             '<input v-model="novoAutor" @keyup.enter="addpalestra"' +
+                    ' placeholder="Adicionar autor da palestra" type="text" class="form-control" />'  +
              '<span class="input-group-btn">' +
-             '  <button @click="addLivro" class="js-add btn btn-primary btn-block"' +
-                ' type="button">Adicionar!</button>'  +
-             '</span>' +
+             '  <button @click="addpalestra" class="js-add btn btn-primary btn-block"' +
+                ' type="button">Adicionar!</button> '  +
+             '</span> <br /> ' +
        '<div>'
    });
    
@@ -121,7 +122,7 @@ let $ul, li, $li, $label, $div, livro, autor;
        return data;
      },
      methods: methods,
-     template:
+     template: 
             '<h2>{{ cabecalho }}'
     });
    
@@ -133,6 +134,7 @@ let $ul, li, $li, $label, $div, livro, autor;
      template:
        '<div class="container">' +
             '<main-menu></main-menu>'+
+            '<img src="images/nasc.png" align="center" />' +
             '<cabecalho></cabecalho>'+
             '<itens-comp></itens-comp>'+
             '<add-item-comp></add-item-comp>'+
@@ -149,7 +151,8 @@ let $ul, li, $li, $label, $div, livro, autor;
        '<nav>' +
             '<a href="#" @click="changeRoute(\'/\')">Home</a>'+
            '<a href="#" @click="changeRoute(\'/contador\')">Contador</a>'+
-       '<nav>'
+       '</nav>' +
+       '<img src="images/nasc.png" align="center" />',
    });
    
       let Contador =  Vue.extend({
@@ -160,6 +163,7 @@ let $ul, li, $li, $label, $div, livro, autor;
      template:
       '<div class="container">' +
           '<main-menu></main-menu>'+
+          '<img src="images/nasc.png" align="center" />' +
           '<counter></counter>'+
        '<div>'
    });
@@ -176,7 +180,7 @@ let $ul, li, $li, $label, $div, livro, autor;
    Vue.component('cabecalho', Cabecalho);
    Vue.component('home', Home);
    Vue.component('main-menu', Menu);
-    Vue.component('contador', Contador);
+    Vue.component('counter', Contador);
 
    /**
     * Criando Rotas
@@ -209,14 +213,13 @@ new Vue({
 var dateNow = new Date();
 
             Vue.component('counter', {
-                template: '<div>'
-                + '<template v-if="date > now">'
-                    + '<div><span>{{ d }}</span><br>dias</div> : '
-                    + '<div><span>{{ h }}</span><br>horas</div> : '
-                    + '<div><span>{{ m }}</span><br>minutos</div> : '
-                    + '<div><span>{{ s }}</span><br>segundos</div>'
-                + '</template>'
-                + '<p class="counter-closed" v-else>Que pena, essa promoção acabou :(</p>',
+                template: '<div align="center" class="counter">'
+                + '<template>'
+                    + '<span>{{ d }}</span> dias | '
+                    + '<span>{{ h }}</span> horas | '
+                    + '<span>{{ m }}</span> minutos | '
+                    + '<span>{{ s }}</span> segundos'
+                + '</template>',
 
                 props : {
                     day : {
@@ -252,14 +255,14 @@ var dateNow = new Date();
 
                 data: function () {
                     return {
-                        date: 1535217814000,
+                        date: new Date(2018,08,27,00,00,00,00),
                         now: Math.trunc((new Date()).getTime() / 1000)
                     }
                 },
 
                 mounted: function () {
                     var self = this;
-                    var date = new Date(this.year, this.month-1, this.day, this.hour, this.minute, this.second);
+                    var date = new Date(2017,12,15,00,00,00,00);
 
                     this.date = Math.trunc(date.getTime() / 1000);
 
@@ -282,7 +285,7 @@ var dateNow = new Date();
                     },
 
                     d: function() {
-                        return Math.trunc((this.date - this.now) / 60 / 60 / 24);
+                        return Math.trunc((this.date - this.now) / 60 / 60 / 3);
                     }
                 }
             });
