@@ -38,8 +38,13 @@ let $ul, li, $li, $label, $div, palestra, autor;
 
  // Data e Vue
     let data = {
-     palestras: [{ titulo: 'Construindo um site em 10min com vue.js', autor: 'Camilla Martins && Débora Duarte', checked: true },
-             { titulo: 'CSS no JavaScript. Usar ou não usar? Eis a questão!', autor: 'Aline Bastos', checked: false }],
+     palestras: [{ titulo: 'Progressive Web Apps e a evolução da Web', autor: 'Loiane Groner', checked: true },
+     { titulo: 'A importância do U de UX', autor: 'Nathi Alves', checked: true },
+     { titulo: 'Vestindo a camisa da comunidade', autor: 'Felipe de Morais', checked: true },
+     { titulo: 'CSS no JavaScript. Usar ou não usar? Eis a questão!', autor: 'Aline Bastos', checked: true },
+     { titulo: 'Construindo um site em 10min com vue.js', autor: 'Camilla Martins && Débora Duarte', checked: false },
+    { titulo: 'Desenvolvendo com Angular CLI', autor: 'Vanessa Tonini', checked: false },
+             ],
      cabecalho: 'FrontInPoa && BrazilJs',
      novapalestra: '',
      novoAutor: '',
